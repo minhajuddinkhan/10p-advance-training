@@ -44,4 +44,12 @@ describe("Stack", () => {
       myStack.push(143);
       expect(myStack.pop()).toBe(143)
   })
+
+  it("after pushing X and Y - will pop Y and X", () => {
+
+    myStack.push(123)
+    myStack.push(345)
+    expect(myStack.pop()).toBe(345)
+    expect(myStack.pop()).toBe(123)
+  })
 });

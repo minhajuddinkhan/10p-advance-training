@@ -1,7 +1,7 @@
 class Stack {
   constructor() {
     this.size = 0;
-    this.element = -1;
+    this.elements = [];
   }
 
   isEmpty() {
@@ -9,16 +9,13 @@ class Stack {
   }
 
   push(element) {
-    this.element = element;
-    this.size++;
+    this.elements[this.size++] = element;
   }
   pop() {
-    
     if (this.isEmpty()) {
       throw new Stack.StackUnderflowError("underflow");
     }
-    this.size--;
-    return this.element;
+    return this.elements[--this.size]
   }
 }
 
