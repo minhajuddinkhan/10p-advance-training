@@ -1,23 +1,11 @@
-const { createClient, print } = require('redis');
+const express = require('express')
+const app = express();
 
 
-const redisClient = createClient();
+const { UserService } = require('./db');
+app.get('/hello', (req, res) => {
+    
+    res.json({key: new UserService().getUser()})
+})
 
-redisClient.on('error', (err) => {
-    console.log('err occ', err);
-});
-
-
-redisClient.set('string key', 'string val', print);
-
-// redisClient.lpush('basic-list', 'World!');
-// redisClient.lpush('basic-list', 'Hello')
-
-redisClient.lrange('basic-list', 0, 5, (err, reply)=> {
-    if(err) {
-        console.log(err)
-    }
-    else {
-        console.log(reply);
-    }
-});
+module.exports = app;

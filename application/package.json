@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "jest": "^24.9.0",
+    "mockery": "^2.1.0",
+    "package.json": "^2.0.1",
     "redis": "^2.8.0",
     "supertest": "^4.0.2"
   },
