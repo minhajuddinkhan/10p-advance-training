@@ -20,6 +20,10 @@ class App {
         return Promise.resolve();
     }
 
+    get() {
+        return this.app;
+    }
+
     start(cb) {
         console.log(`starting server on port ${this.conf.port}`)
         this.app.listen(this.conf.port, cb);
