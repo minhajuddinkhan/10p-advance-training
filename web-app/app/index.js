@@ -15,8 +15,8 @@ class App {
     async bootstrap() {
         initializeRoutes(this.router);
         this.app.use(morgan())
-        this.app.use(this.router);
         this.app.use(bodyParser());
+        this.app.use(this.router);
         return Promise.resolve();
     }
 

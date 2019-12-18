@@ -1,13 +1,22 @@
 // routes/user.js
 
+// import our newly create controller;
+const { FeedsController } = require('../controllers');
 class FeedRoutes {
+
   constructor(router) {
-    router.get("/api/v1/feeds", (req, res) => this.getFeeds(req, res));
+
+    this.feedController = new FeedsController();
+    this.router = router;
+    this.registerRoutes();
+
   }
 
-  getFeeds(req, res) {
-    res.json({ feeds: [] });
+  registerRoutes() {
+        this.router.get("/api/v1/feeds", (req, res) => this.feedController.getFeeds(req, res));
+        this.router.post('/api/v1/feeds', (req, res) => this.feedController.createFeeds(req, res));
   }
+
 }
 
 module.exports = { FeedRoutes };
