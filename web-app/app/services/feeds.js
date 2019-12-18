@@ -1,4 +1,5 @@
 const { FeedsRepo } = require('../repo');
+const {InvalidContentFeed} = require('../errors');
 
 class FeedsService {
     constructor() {
@@ -11,6 +12,9 @@ class FeedsService {
     }
 
     createFeed(feed) {
+        if(!feed) {
+            throw new InvalidContentFeed("empty content");
+        }
         return this.feedsRepo.createFeed(feed);
     }
 }
