@@ -1,14 +1,17 @@
+
+const { db } = require('../models')
+
 class FeedsRepo {
   constructor() {
-    this.feeds = [];
+    this.feeds =  db.Feed;
   }
 
   getFeeds() {
-    return this.feeds;
+    return this.feeds.findAll({});
   }
 
   createFeed(feed) {
-    this.feeds.push(feed);
+    return this.feeds.create(feed);
   }
 }
 

@@ -4,6 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const { initializeRoutes } = require('./routes')
+const { db, initialize } = require('./models');
 
 class App {
     constructor(configuration) {
@@ -13,6 +14,7 @@ class App {
     }
 
     async bootstrap() {
+        await this.syncDatabase();
         initializeRoutes(this.router);
         this.app.use(morgan())
         this.app.use(bodyParser());
@@ -20,13 +22,21 @@ class App {
         return Promise.resolve();
     }
 
+    syncDatabase() {
+        const { database, username , password, postgresConf} = this.conf.get('db')
+        initialize(database, username, password, postgresConf);
+        return db.sequelize.sync();
+    }
+
     get() {
         return this.app;
     }
 
+
+
     start(cb) {
-        console.log(`starting server on port ${this.conf.port}`)
-        this.app.listen(this.conf.port, cb);
+        console.log(`starting server on port ${this.conf.get('port')}`)
+        this.app.listen(this.conf.get('port'), cb);
     }
 }
 

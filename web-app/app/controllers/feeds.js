@@ -19,13 +19,13 @@ class FeedsController {
     this.feedsService = new FeedsService();
   }
 
-  getFeeds(req, res) {
-      res.json({"feeds": this.feedsService.getFeeds()})
+  async getFeeds(req, res) {
+      res.json({"feeds": await this.feedsService.getFeeds()})
   }
 
-  createFeeds(req, res) {
+  async createFeeds(req, res) {
     console.log(req.body);
-      this.feedsService.createFeed(req.body);
+      await this.feedsService.createFeed(req.body);
       res.json({"created": true})
   }
 }

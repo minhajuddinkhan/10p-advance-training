@@ -1,10 +1,11 @@
 const { App } = require("../../../app");
+const { config } = require('../../../config');
 const supertest = require("supertest");
 
 describe("Feeds API", function() {
   let api;
   beforeAll(async () => {
-    const app = new App({});
+    const app = new App(config);
     await app.bootstrap();
     api = supertest(app.get());
   });
@@ -15,9 +16,6 @@ describe("Feeds API", function() {
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200)
-      .then(response => {
-        expect(response.body.feeds.length).toBe(0);
-      });
   });
 
 });
