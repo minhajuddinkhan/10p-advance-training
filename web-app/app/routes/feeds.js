@@ -15,6 +15,7 @@ class FeedRoutes {
   registerRoutes() {
         this.router.get("/api/v1/feeds", (req, res) => this.feedController.getFeeds(req, res));
         this.router.post('/api/v1/feeds', (req, res) => this.feedController.createFeeds(req, res));
+        this.router.put('/api/v1/feeds/:id', (req, res) => this.feedController.updateFeeds(req, res));
   }
 
 }

@@ -1,5 +1,6 @@
 
 const { db } = require('../models')
+const { FeedNotFound } = require('../errors');
 
 class FeedsRepo {
   constructor() {
@@ -12,6 +13,15 @@ class FeedsRepo {
 
   createFeed(feed) {
     return this.feeds.create(feed);
+  }
+
+  async updateFeed(feedId, feed) {
+    const feedObject = await this.feeds.findOne({where: {id: feedId}});
+    console.log(feedObject)
+    if (!feedObject) {
+      throw {code: 404, message: "feed not found"}
+    }
+    return this.feeds.update({content: feed.content, lastContent: feedObject.content}, { where: { id: feedId }});
   }
 }
 

@@ -35,4 +35,25 @@ describe("Feeds Service", () => {
       expect(ex).toBeInstanceOf(InvalidContentFeed);
     }
   });
+
+  it("With valid id and data - should update feed", () => {
+    feedService.feedsRepo = new (class {
+      constructor() {
+        this.feeds = [];
+      }
+      getFeeds() {
+        return this.feeds;
+      }
+      createFeed(feed) {
+        this.feeds.push(feed);
+      }
+      updateFeed(_, feed) {
+        this.feeds[0].lastContent = this.feeds[0].content;
+        this.feeds[0].content = feed.content;
+      }
+    })();
+    feedService.createFeed({ content: "Hello!" });
+    feedService.updateFeed(1, { content: "Hello World Again" });
+    expect(feedService.getFeeds()[0].content).toBe("Hello World Again");
+  });
 });

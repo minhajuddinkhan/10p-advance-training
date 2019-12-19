@@ -1,3 +1,3 @@
-const {InvalidContentFeed} = require('./feeds');
+const {InvalidContentFeed, FeedNotFound} = require('./feeds');
 
-module.exports = {InvalidContentFeed};
+module.exports = {InvalidContentFeed, FeedNotFound};

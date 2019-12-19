@@ -12,10 +12,14 @@ class FeedsService {
     }
 
     createFeed(feed) {
-        if(!feed) {
+        if(!feed.content) {
             throw new InvalidContentFeed("empty content");
         }
         return this.feedsRepo.createFeed(feed);
+    }
+
+    updateFeed(feedId, feed) {
+        return this.feedsRepo.updateFeed(feedId, feed);
     }
 }
 module.exports = { FeedsService };

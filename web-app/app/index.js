@@ -32,8 +32,6 @@ class App {
         return this.app;
     }
 
-
-
     start(cb) {
         console.log(`starting server on port ${this.conf.get('port')}`)
         this.app.listen(this.conf.get('port'), cb);

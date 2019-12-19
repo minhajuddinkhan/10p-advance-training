@@ -16,16 +16,16 @@ const config = convict({
   },
   db: {
     username: {
-        format: String,
-        default: "postgres"
+      format: String,
+      default: "postgres"
     },
     password: {
-        format: String,
-        default: ""
+      format: String,
+      default: ""
     },
     database: {
-        format: String,
-        default: "postgres"
+      format: String,
+      default: "postgres"
     },
     postgresConf: {
       host: {
@@ -42,6 +42,9 @@ const config = convict({
         doc: "port for connection",
         format: "port",
         default: 5432
+      },
+      logging: {
+        default: false
       }
     }
   }
