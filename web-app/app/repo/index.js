@@ -1,2 +1,3 @@
 const { FeedsRepo } = require('./feeds');
-module.exports = { FeedsRepo }
+const { UsersRepo } = require('./user')
+module.exports = { FeedsRepo, UsersRepo };

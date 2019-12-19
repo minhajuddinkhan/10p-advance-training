@@ -1,5 +1,5 @@
 const { FeedsService } = require("../services");
-
+const { InvalidContentFeed, FeedNotFound } = require("../errors");
 //  controllers/feed.js
 
 // Steps
@@ -12,8 +12,8 @@ const { FeedsService } = require("../services");
 // 7. replace router methods with controller.
 
 class FeedsController {
-  constructor() {
-    this.feedsService = new FeedsService();
+  constructor(redis) {
+    this.feedsService = new FeedsService(redis);
   }
 
   async getFeeds(req, res) {
@@ -21,19 +21,49 @@ class FeedsController {
   }
 
   async createFeeds(req, res) {
-    console.log(req.body);
-    await this.feedsService.createFeed(req.body);
-    res.json({ created: true });
+    try {
+      console.log('created By', req.user.id);
+      await this.feedsService.createFeed(req.body);
+      res.json({ created: true });
+    } catch (ex) {
+      switch (ex.constructor) {
+
+        case InvalidContentFeed:
+          res.status(400);
+          res.json({ message: "Invalid content" });
+          return;
+
+        default:
+          res.status(500);
+          res.json({ message: "Something bad happened" });
+          return;
+          break;
+      }
+    }
   }
 
   async updateFeeds(req, res) {
     try {
       await this.feedsService.updateFeed(req.params.id, req.body);
-      res.json({updated: true});
+      res.json({ updated: true });
     } catch (ex) {
+      switch (ex.constructor) {
+        case InvalidContentFeed:
+          res.status(400);
+          res.json({ message: "Invalid content" });
+          return;
 
-      res.status(ex.code);
-      res.json({ error: "not found" });
+        case FeedNotFound:
+          res.status(404);
+          res.json({ message: "Feed not found" });
+          return;
+
+        default:
+          res.status(500);
+          res.json({ message: "Something bad happened" });
+          return;
+          break;
+      }
     }
   }
 }

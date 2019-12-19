@@ -1,4 +1,5 @@
 const { FeedsRepo } = require('../repo');
+const { Redis } = require('../cache');
 const {InvalidContentFeed} = require('../errors');
 
 class FeedsService {

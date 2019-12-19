@@ -10,12 +10,12 @@ describe("Feeds API", function() {
     api = supertest(app.get());
   });
 
-  it("can get feeds", async () => {
+  it("On getting without token - should get 401", async () => {
     return api
       .get("/api/v1/feeds")
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
-      .expect(200)
+      .expect(401)
   });
 
 });

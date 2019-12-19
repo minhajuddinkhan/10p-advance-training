@@ -23,14 +23,14 @@ describe("Feeds Service", () => {
   });
   it("With valid content - Should create Feed", () => {
     const content = "hello World!";
-    feedService.createFeed(content);
+    feedService.createFeed({content});
     const feeds = feedService.getFeeds();
     expect(feeds.length).toBe(1);
   });
 
   it(" With invalid content - Should throw exception", () => {
     try {
-      feedService.createFeed();
+      feedService.createFeed({content: "Hello!"});
     } catch (ex) {
       expect(ex).toBeInstanceOf(InvalidContentFeed);
     }

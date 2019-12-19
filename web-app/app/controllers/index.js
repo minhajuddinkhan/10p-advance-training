@@ -1,5 +1,5 @@
 // controllers/index.js
 
 const { FeedsController }  = require('./feeds')
-
-module.exports = { FeedsController }
+const { UserController } = require('./users')
+module.exports = { FeedsController, UserController }

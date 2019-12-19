@@ -1,9 +1,11 @@
 //  routes/index.js
 const { FeedRoutes } = require("./feeds");
+const { UserRoutes }  = require('./users');
+const initializeRoutes = (router, dependencies) => {
 
-const initializeRoutes = router => {
   //list all routes here.
-  new FeedRoutes(router);
+  new FeedRoutes(router, dependencies);
+  new UserRoutes(router, dependencies.redis)
 };
 
 module.exports = {

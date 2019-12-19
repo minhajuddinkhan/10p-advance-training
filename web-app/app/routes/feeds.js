@@ -4,9 +4,9 @@
 const { FeedsController } = require('../controllers');
 class FeedRoutes {
 
-  constructor(router) {
+  constructor(router, redis) {
 
-    this.feedController = new FeedsController();
+    this.feedController = new FeedsController(redis);
     this.router = router;
     this.registerRoutes();
 

@@ -17,7 +17,6 @@ class FeedsRepo {
 
   async updateFeed(feedId, feed) {
     const feedObject = await this.feeds.findOne({where: {id: feedId}});
-    console.log(feedObject)
     if (!feedObject) {
       throw {code: 404, message: "feed not found"}
     }

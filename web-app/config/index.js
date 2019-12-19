@@ -14,6 +14,13 @@ const config = convict({
     default: 4000,
     env: "PORT"
   },
+  jwtSecret: {
+    default: 'this-is-my-jwt-secret',
+  },
+  debug: {
+    default: true
+
+  },
   db: {
     username: {
       format: String,
@@ -53,7 +60,6 @@ const config = convict({
 const env = config.get("env");
 try {
   const path = `${__dirname}/${env}.json`;
-  console.log("trying to access %s", path);
   fs.accessSync(path, fs.constants.F_OK);
 
   config.loadFile(path);

@@ -1,8 +1,11 @@
 version: '3'
 
 services:
-
-  postgres:
+  db:
     image: postgres
     ports:
       - "5432:5432"
+  node-redis:
+    image: redis
+    ports:
+      - "6379:6379"
