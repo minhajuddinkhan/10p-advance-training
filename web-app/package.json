@@ -13,7 +13,7 @@
     "@hapi/joi": "^16.1.8",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
-    "convict": "^5.2.0",
+    "convict": "^6.2.2",
     "express": "~4.17.1",
     "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
